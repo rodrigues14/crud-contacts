@@ -1,6 +1,6 @@
 package br.com.lucasdev.contacts.dto;
 
-import br.com.lucasdev.contacts.model.AddressContact;
+import br.com.lucasdev.contacts.domain.address.AddressContact;
 
 public record AddressContactDTO(
         String street,

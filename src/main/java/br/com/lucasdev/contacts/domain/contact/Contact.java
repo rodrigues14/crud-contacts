@@ -1,5 +1,6 @@
-package br.com.lucasdev.contacts.model;
+package br.com.lucasdev.contacts.domain.contact;
 
+import br.com.lucasdev.contacts.domain.address.AddressContact;
 import br.com.lucasdev.contacts.dto.ContactDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

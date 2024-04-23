@@ -1,4 +1,4 @@
-package br.com.lucasdev.contacts.model;
+package br.com.lucasdev.contacts.domain.address;
 
 import br.com.lucasdev.contacts.dto.AddressContactDTO;
 import jakarta.persistence.Embeddable;

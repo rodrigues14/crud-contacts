@@ -2,7 +2,7 @@ package br.com.lucasdev.contacts.controller;
 
 import br.com.lucasdev.contacts.dto.AddressContactDTO;
 import br.com.lucasdev.contacts.dto.ContactDTO;
-import br.com.lucasdev.contacts.model.Contact;
+import br.com.lucasdev.contacts.domain.contact.Contact;
 import br.com.lucasdev.contacts.repository.ContactRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
