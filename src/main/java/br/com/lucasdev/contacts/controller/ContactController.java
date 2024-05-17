@@ -1,7 +1,9 @@
 package br.com.lucasdev.contacts.controller;
 
-import br.com.lucasdev.contacts.dto.ContactDTO;
+import br.com.lucasdev.contacts.dto.ContactRequestDTO;
 import br.com.lucasdev.contacts.domain.contact.Contact;
+import br.com.lucasdev.contacts.dto.ContactResponseDTO;
+import br.com.lucasdev.contacts.dto.ContactUpdateDTO;
 import br.com.lucasdev.contacts.repository.ContactRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +24,27 @@ public class ContactController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity register(@RequestBody @Valid ContactDTO dados, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<ContactResponseDTO> register(@RequestBody @Valid ContactRequestDTO dados, UriComponentsBuilder uriComponentsBuilder) {
         var contact = new Contact(dados);
         repository.save(contact);
         var uri = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(contact.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new ContactDTO(contact));
+        return ResponseEntity.created(uri).body(new ContactResponseDTO(contact));
     }
 
     @GetMapping
-    public ResponseEntity<List<ContactDTO>> findAll() {
-        var contactsList = repository.findAll().stream().map(c -> new ContactDTO(c)).toList();
+    public ResponseEntity<List<ContactResponseDTO>> findAll() {
+        var contactsList = repository.findAll().stream().map(ContactResponseDTO::new).toList();
         return ResponseEntity.ok(contactsList);
     }
 
 
     @PutMapping()
     @Transactional
-    public ResponseEntity update(@RequestBody ContactDTO data) {
+    public ResponseEntity<ContactResponseDTO> update(@RequestBody ContactUpdateDTO data) {
         var contact = repository.getReferenceById(data.id());
         contact.updateInformations(data);
-        return ResponseEntity.ok(new ContactDTO(contact));
+        return ResponseEntity.ok(new ContactResponseDTO(contact));
     }
 
     @DeleteMapping("/{id}")
@@ -54,9 +56,9 @@ public class ContactController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContactDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<ContactResponseDTO> findById(@PathVariable Long id) {
         var contact = repository.findById(id);
-        if (contact.isPresent()) return ResponseEntity.ok(new ContactDTO(contact.get()));
+        if (contact.isPresent()) return ResponseEntity.ok(new ContactResponseDTO(contact.get()));
         return ResponseEntity.notFound().build();
     }
 

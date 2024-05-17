@@ -1,23 +1,24 @@
 package br.com.lucasdev.contacts.dto;
 
 import br.com.lucasdev.contacts.domain.contact.Contact;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 
-public record ContactDTO(
-        Long id,
+public record ContactRequestDTO(
         @NotBlank
         String name,
         @NotBlank
         String phone,
+        @Email
         String email,
         AddressContactDTO address,
         LocalDate birth,
         String notes
 ) {
-        public ContactDTO(Contact contact) {
-                this(contact.getId(), contact.getName(), contact.getPhone(),
+        public ContactRequestDTO(Contact contact) {
+                this(contact.getName(), contact.getPhone(),
                         contact.getEmail(), new AddressContactDTO(contact.getAddress()),
                         contact.getBirth(), contact.getNotes());
         }

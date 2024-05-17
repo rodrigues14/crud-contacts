@@ -1,7 +1,8 @@
 package br.com.lucasdev.contacts.domain.contact;
 
 import br.com.lucasdev.contacts.domain.address.AddressContact;
-import br.com.lucasdev.contacts.dto.ContactDTO;
+import br.com.lucasdev.contacts.dto.ContactRequestDTO;
+import br.com.lucasdev.contacts.dto.ContactUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,7 +29,7 @@ public class Contact {
     private LocalDate birth;
     private String notes;
 
-    public Contact(ContactDTO data) {
+    public Contact(ContactRequestDTO data) {
         this.name = data.name();
         this.phone = data.phone();
         this.email = data.email();
@@ -37,7 +38,7 @@ public class Contact {
         this.notes = data.notes();
     }
 
-    public void updateInformations(ContactDTO data) {
+    public void updateInformations(ContactUpdateDTO data) {
         if (data.name() != null) this.name = data.name();
         if (data.phone() != null) this.phone = data.phone();
         if (data.email() != null) this.email = data.email();
