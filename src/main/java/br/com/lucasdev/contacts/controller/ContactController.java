@@ -57,12 +57,8 @@ public class ContactController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ContactResponseDTO> findById(@PathVariable Long id) {
-        try {
-            ContactResponseDTO contact = service.findById(id);
-            return ResponseEntity.ok(contact);
-        } catch (EntityNotFoundException ex) {
-            return ResponseEntity.notFound().build();
-        }
+        ContactResponseDTO contact = service.findById(id);
+        return ResponseEntity.ok(contact);
     }
 
 }
